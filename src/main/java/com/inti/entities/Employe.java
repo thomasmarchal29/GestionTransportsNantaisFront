@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Employe {
 	
 	private int idEmploye;
@@ -28,6 +34,8 @@ public class Employe {
 		this.adresseMail = adresseMail;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getIdEmploye() {
 		return idEmploye;
 	}
@@ -36,6 +44,7 @@ public class Employe {
 		this.idEmploye = idEmploye;
 	}
 
+	@Column
 	public String getNom() {
 		return nom;
 	}
@@ -44,6 +53,7 @@ public class Employe {
 		this.nom = nom;
 	}
 
+	@Column
 	public String getPrenom() {
 		return prenom;
 	}
@@ -52,6 +62,7 @@ public class Employe {
 		this.prenom = prenom;
 	}
 
+	@Column
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}
@@ -60,6 +71,7 @@ public class Employe {
 		this.dateNaissance = dateNaissance;
 	}
 
+	@Column
 	public int getNumeroTelephone() {
 		return numeroTelephone;
 	}
@@ -68,6 +80,7 @@ public class Employe {
 		this.numeroTelephone = numeroTelephone;
 	}
 
+	@Column
 	public String getAdresseMail() {
 		return adresseMail;
 	}

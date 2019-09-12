@@ -9,7 +9,7 @@ import javax.persistence.ManyToMany;
 public class MoyenTransport {
 	
 	private int idMoyenTransport;
-	private String type;
+	private TypeMoyenTransport typeMoyenTransport;
 	private String immatriculation;
 	private String vetuste;
 	private Date dateDerniereRevision;
@@ -18,9 +18,10 @@ public class MoyenTransport {
 		super();
 	}
 
-	public MoyenTransport(String type, String immatriculation, String vetuste, Date dateDerniereRevision) {
+	public MoyenTransport(TypeMoyenTransport typeMoyenTransport, String immatriculation, String vetuste,
+			Date dateDerniereRevision) {
 		super();
-		this.type = type;
+		this.typeMoyenTransport = typeMoyenTransport;
 		this.immatriculation = immatriculation;
 		this.vetuste = vetuste;
 		this.dateDerniereRevision = dateDerniereRevision;
@@ -34,12 +35,12 @@ public class MoyenTransport {
 		this.idMoyenTransport = idMoyenTransport;
 	}
 
-	public String getType() {
-		return type;
+	public TypeMoyenTransport getTypeMoyenTransport() {
+		return typeMoyenTransport;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeMoyenTransport(TypeMoyenTransport typeMoyenTransport) {
+		this.typeMoyenTransport = typeMoyenTransport;
 	}
 
 	public String getImmatriculation() {

@@ -1,11 +1,10 @@
 package com.inti.entities;
 
-public enum EtatConges {
+public enum TypeMoyenTransport {
 	
-	En_attente_de_validation,
-	Acceptés,
-	Refusés;
-
+	Bus,
+	Tramway;
+	
 	public String enumeration = "";
 
 	public String getEnumeration() {
@@ -15,5 +14,5 @@ public enum EtatConges {
 	public void setEnumeration(String enumeration) {
 		this.enumeration = enumeration;
 	}
-	
+
 }

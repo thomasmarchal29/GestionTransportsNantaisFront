@@ -15,7 +15,7 @@ public class Conges {
 	private int idConges;
 	private Date dateDebut;
 	private Date dateFin;
-	private String etat;
+	private EtatConges etatConges;
 	
 	@ManyToOne
 	private Employe employe;
@@ -24,10 +24,11 @@ public class Conges {
 		super();
 	}
 
-	public Conges(Date dateDebut, Date dateFin) {
+	public Conges(Date dateDebut, Date dateFin, EtatConges etatConges) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
+		this.etatConges = etatConges;
 	}
 
 	@Id
@@ -58,13 +59,12 @@ public class Conges {
 		this.dateFin = dateFin;
 	}
 
-	@Column
-	public String getEtat() {
-		return etat;
+	public EtatConges getEtatConges() {
+		return etatConges;
 	}
 
-	public void setEtat(String etat) {
-		this.etat = etat;
+	public void setEtatConges(EtatConges etatConges) {
+		this.etatConges = etatConges;
 	}
 
 }
