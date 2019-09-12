@@ -1,6 +1,10 @@
 package com.inti.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.OneToMany;
 
 public class Employe {
 	
@@ -71,5 +75,8 @@ public class Employe {
 	public void setAdresseMail(String adresseMail) {
 		this.adresseMail = adresseMail;
 	}
+	
+	@OneToMany(mappedBy = "employe")
+	private List<Conges> listConges = new ArrayList<Conges>();
 
 }
