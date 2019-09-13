@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+@Entity
 public class MoyenTransport {
 	
 	private int idMoyenTransport;
@@ -27,6 +33,8 @@ public class MoyenTransport {
 		this.dateDerniereRevision = dateDerniereRevision;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getIdMoyenTransport() {
 		return idMoyenTransport;
 	}
@@ -35,6 +43,7 @@ public class MoyenTransport {
 		this.idMoyenTransport = idMoyenTransport;
 	}
 
+	@Column
 	public TypeMoyenTransport getTypeMoyenTransport() {
 		return typeMoyenTransport;
 	}
@@ -43,6 +52,7 @@ public class MoyenTransport {
 		this.typeMoyenTransport = typeMoyenTransport;
 	}
 
+	@Column
 	public String getImmatriculation() {
 		return immatriculation;
 	}
@@ -51,6 +61,7 @@ public class MoyenTransport {
 		this.immatriculation = immatriculation;
 	}
 
+	@Column
 	public String getVetuste() {
 		return vetuste;
 	}
@@ -59,6 +70,7 @@ public class MoyenTransport {
 		this.vetuste = vetuste;
 	}
 
+	@Column
 	public Date getDateDerniereRevision() {
 		return dateDerniereRevision;
 	}

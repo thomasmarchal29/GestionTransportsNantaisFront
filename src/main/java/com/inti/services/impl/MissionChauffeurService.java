@@ -17,26 +17,22 @@ public class MissionChauffeurService implements IMissionChauffeurService {
 
 	@Override
 	public List<MissionChauffeur> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return missionChauffeurRepository.findAll();
 	}
 
 	@Override
 	public MissionChauffeur findById(int idMissionChauffeur) {
-		// TODO Auto-generated method stub
-		return null;
+		return missionChauffeurRepository.findById(idMissionChauffeur).orElse(null);
 	}
-
+	
 	@Override
 	public void save(MissionChauffeur missionChauffeur) {
-		// TODO Auto-generated method stub
-		
+		missionChauffeurRepository.save(missionChauffeur);
 	}
 
 	@Override
 	public void deleteById(int idMissionChauffeur) {
-		// TODO Auto-generated method stub
-		
+		missionChauffeurRepository.deleteById(idMissionChauffeur);
 	}
 
 }

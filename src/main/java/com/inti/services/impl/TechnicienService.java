@@ -17,26 +17,22 @@ public class TechnicienService implements ITechnicienService {
 
 	@Override
 	public List<Technicien> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return technicienRepository.findAll();
 	}
 
 	@Override
 	public Technicien findById(int idTechnicien) {
-		// TODO Auto-generated method stub
-		return null;
+		return technicienRepository.findById(idTechnicien).orElse(null);
 	}
-
+	
 	@Override
 	public void save(Technicien technicien) {
-		// TODO Auto-generated method stub
-		
+		technicienRepository.save(technicien);
 	}
 
 	@Override
 	public void deleteById(int idTechnicien) {
-		// TODO Auto-generated method stub
-		
+		technicienRepository.deleteById(idTechnicien);
 	}
 
 }

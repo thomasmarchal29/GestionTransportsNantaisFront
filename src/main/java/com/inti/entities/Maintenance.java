@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Maintenance {
 	
 	private int idMaintenance;
 	private Date dateMaintenance;
 	
-	@ManyToOne
 	private Administrateur administrateur;
 
 	public Maintenance() {
@@ -23,15 +29,9 @@ public class Maintenance {
 		super();
 		this.dateMaintenance = dateMaintenance;
 	}
-
-	public Date getDateMaintenance() {
-		return dateMaintenance;
-	}
-
-	public void setDateMaintenance(Date dateMaintenance) {
-		this.dateMaintenance = dateMaintenance;
-	}
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getIdMaintenance() {
 		return idMaintenance;
 	}
@@ -40,6 +40,17 @@ public class Maintenance {
 		this.idMaintenance = idMaintenance;
 	}
 
+	@Column
+	public Date getDateMaintenance() {
+		return dateMaintenance;
+	}
+
+	public void setDateMaintenance(Date dateMaintenance) {
+		this.dateMaintenance = dateMaintenance;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "AdminResponsableAjout")
 	public Administrateur getAdministrateur() {
 		return administrateur;
 	}

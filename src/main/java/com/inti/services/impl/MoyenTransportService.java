@@ -17,26 +17,22 @@ public class MoyenTransportService implements IMoyenTransportService {
 
 	@Override
 	public List<MoyenTransport> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return moyenTransportRepository.findAll();
 	}
 
 	@Override
 	public MoyenTransport findById(int idMoyenTransport) {
-		// TODO Auto-generated method stub
-		return null;
+		return moyenTransportRepository.findById(idMoyenTransport).orElse(null);
 	}
-
+	
 	@Override
 	public void save(MoyenTransport moyenTransport) {
-		// TODO Auto-generated method stub
-		
+		moyenTransportRepository.save(moyenTransport);
 	}
 
 	@Override
 	public void deleteById(int idMoyenTransport) {
-		// TODO Auto-generated method stub
-		
+		moyenTransportRepository.deleteById(idMoyenTransport);
 	}
 
 }
