@@ -5,13 +5,19 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "typeEmploye", discriminatorType = DiscriminatorType.STRING)
 public class Employe {
 	
 	private int idEmploye;
@@ -21,17 +27,23 @@ public class Employe {
 	private int numeroTelephone;
 	private String adresseMail;
 	
+	private String username;
+	private String password;
+	
 	public Employe() {
 		super();
 	}
 
-	public Employe(String nom, String prenom, Date dateNaissance, int numeroTelephone, String adresseMail) {
+	public Employe(String nom, String prenom, Date dateNaissance, int numeroTelephone, String adresseMail,
+			String username, String password) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
 		this.numeroTelephone = numeroTelephone;
 		this.adresseMail = adresseMail;
+		this.username = username;
+		this.password = password;
 	}
 
 	@Id
@@ -89,6 +101,22 @@ public class Employe {
 		this.adresseMail = adresseMail;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@OneToMany(mappedBy = "employe")
 	private List<Conges> listConges = new ArrayList<Conges>();
 

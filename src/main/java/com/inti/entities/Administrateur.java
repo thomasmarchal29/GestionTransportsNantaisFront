@@ -3,8 +3,16 @@ package com.inti.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@Entity
+@DiscriminatorValue("chauffeur")
 public class Administrateur extends Employe {
 	
 	private int idAdministrateur;
@@ -19,6 +27,8 @@ public class Administrateur extends Employe {
 		this.grade = grade;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getIdAdministrateur() {
 		return idAdministrateur;
 	}
@@ -27,6 +37,7 @@ public class Administrateur extends Employe {
 		this.idAdministrateur = idAdministrateur;
 	}
 
+	@Column
 	public String getGrade() {
 		return grade;
 	}
