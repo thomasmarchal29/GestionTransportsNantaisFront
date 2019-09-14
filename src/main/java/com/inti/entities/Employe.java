@@ -101,6 +101,7 @@ public class Employe {
 		this.adresseMail = adresseMail;
 	}
 	
+	@Column
 	public String getUsername() {
 		return username;
 	}
@@ -109,6 +110,7 @@ public class Employe {
 		this.username = username;
 	}
 
+	@Column
 	public String getPassword() {
 		return password;
 	}

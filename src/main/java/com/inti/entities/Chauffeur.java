@@ -6,34 +6,32 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
 @DiscriminatorValue("chauffeur")
 public class Chauffeur extends Employe {
 	
-	private String habilitationTransport;
+	private String habilitationMoyenTransport;
 	private String permis;
 	
 	public Chauffeur() {
 		super();
 	}
 
-	public Chauffeur(String habilitationTransport, String permis) {
+	public Chauffeur(String habilitationMoyenTransport, String permis) {
 		super();
-		this.habilitationTransport = habilitationTransport;
+		this.habilitationMoyenTransport = habilitationMoyenTransport;
 		this.permis = permis;
 	}
 
 	@Column
-	public String getHabilitationTransport() {
-		return habilitationTransport;
+	public String getHabilitationMoyenTransport() {
+		return habilitationMoyenTransport;
 	}
 
-	public void setHabilitationTransport(String habilitationTransport) {
-		this.habilitationTransport = habilitationTransport;
+	public void setHabilitationMoyenTransport(String habilitationMoyenTransport) {
+		this.habilitationMoyenTransport = habilitationMoyenTransport;
 	}
 
 	@Column
@@ -46,13 +44,9 @@ public class Chauffeur extends Employe {
 	}
 	
 	@ManyToMany
-	@JoinTable(name = "ChauffeurMoyenTransport", joinColumns = @JoinColumn(name = "idChauffeur"),
-			inverseJoinColumns = @JoinColumn(name = "idMoyenTransport"))
-	private List<MoyenTransport> listMoyenTransport = new ArrayList<MoyenTransport> ();
+	private List<MoyenTransport> listMoyenTransport = new ArrayList<MoyenTransport>();
 
 	@ManyToMany
-	@JoinTable(name = "ChauffeurMissionChauffeur", joinColumns = @JoinColumn(name = "idChauffeur"),
-			inverseJoinColumns = @JoinColumn(name = "idMissionChauffeur"))
-	private List<MissionChauffeur> listMissionChauffeur = new ArrayList<MissionChauffeur> ();
+	private List<MissionChauffeur> listMissionChauffeur = new ArrayList<MissionChauffeur>();
 	
 }

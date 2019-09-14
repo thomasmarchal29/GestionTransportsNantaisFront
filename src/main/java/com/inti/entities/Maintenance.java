@@ -12,11 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Maintenance {
 	
 	private int idMaintenance;
+	@Temporal(TemporalType.DATE)
 	private Date dateMaintenance;
 	
 	private Administrateur administrateur;
@@ -59,7 +62,7 @@ public class Maintenance {
 		this.administrateur = administrateur;
 	}
 	
-	@ManyToMany(mappedBy = "maintenance")
-	private List<Maintenance> listMaintenance = new ArrayList<Maintenance> ();
+	@ManyToMany(mappedBy = "listMaintenance")
+	private List<Technicien> listTechnicien = new ArrayList<Technicien>();
 
 }

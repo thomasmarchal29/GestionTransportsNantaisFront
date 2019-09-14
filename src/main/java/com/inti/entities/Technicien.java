@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -46,13 +44,9 @@ public class Technicien extends Employe {
 	}
 	
 	@ManyToMany
-	@JoinTable(name = "TechnicienMoyenTransport", joinColumns = @JoinColumn(name = "idTechnicien"),
-			inverseJoinColumns = @JoinColumn(name = "idMoyenTransport"))
-	private List<MoyenTransport> listMoyenTransport = new ArrayList<MoyenTransport> ();
+	private List<MoyenTransport> listMoyenTransport = new ArrayList<MoyenTransport>();
 	
 	@ManyToMany
-	@JoinTable(name = "TechnicienMaintenance", joinColumns = @JoinColumn(name = "idTechnicien"),
-			inverseJoinColumns = @JoinColumn(name = "idMaintenance"))
-	private List<Maintenance> listMaintenance = new ArrayList<Maintenance> ();
+	private List<Maintenance> listMaintenance = new ArrayList<Maintenance>();
 	
 }

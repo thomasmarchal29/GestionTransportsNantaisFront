@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class MissionChauffeur {
 	
 	private int idMissionChauffeur;
+	@Temporal(TemporalType.DATE)
 	private Date dateMission;
+	@Temporal(TemporalType.TIME)
 	private Date horaireMission;
 	
 	private Administrateur administrateur;
@@ -70,7 +74,7 @@ public class MissionChauffeur {
 		this.administrateur = administrateur;
 	}
 	
-	@ManyToMany(mappedBy = "missionChauffeur")
-	private List<MissionChauffeur> listMissionChauffeur = new ArrayList<MissionChauffeur> ();
+	@ManyToMany(mappedBy = "listMissionChauffeur")
+	private List<Chauffeur> listChauffeur = new ArrayList<Chauffeur>();
 
 }

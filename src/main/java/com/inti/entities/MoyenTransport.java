@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class MoyenTransport {
@@ -18,6 +20,7 @@ public class MoyenTransport {
 	private TypeMoyenTransport typeMoyenTransport;
 	private String immatriculation;
 	private String vetuste;
+	@Temporal(TemporalType.DATE)
 	private Date dateDerniereRevision;
 	
 	public MoyenTransport() {
@@ -79,10 +82,10 @@ public class MoyenTransport {
 		this.dateDerniereRevision = dateDerniereRevision;
 	}
 	
-	@ManyToMany(mappedBy = "moyenTransport")
+	@ManyToMany(mappedBy = "listMoyenTransport")
 	private List<Chauffeur> listChauffeur = new ArrayList<Chauffeur> ();
 	
-	@ManyToMany(mappedBy = "moyenTransport")
+	@ManyToMany(mappedBy = "listMoyenTransport")
 	private List<Technicien> listTechnicien = new ArrayList<Technicien> ();
 
 }

@@ -37,15 +37,16 @@ public class ChauffeurController {
 	
 	@PutMapping(value = "/chauffeur/{id}")
 	public void update(@PathVariable("id") int idChauffeur, @RequestBody Chauffeur chauffeur) {
-		Chauffeur e = chauffeurService.findById(idChauffeur);
-		e.setNom(e.getNom());
-		e.setPrenom(e.getPrenom());
-		e.setDateNaissance(e.getDateNaissance());
-		e.setNumeroTelephone(e.getNumeroTelephone());
-		e.setAdresseMail(e.getAdresseMail());
-		e.setUsername(e.getUsername());
-		e.setPassword(e.getPassword());
-		chauffeurService.save(e);
+		Chauffeur c = chauffeurService.findById(idChauffeur);
+		c.setNom(c.getNom());
+		c.setPrenom(c.getPrenom());
+		c.setDateNaissance(c.getDateNaissance());
+		c.setNumeroTelephone(c.getNumeroTelephone());
+		c.setAdresseMail(c.getAdresseMail());
+		c.setUsername(c.getUsername());
+		c.setPassword(c.getPassword());
+		c.setHabilitationMoyenTransport(c.getHabilitationMoyenTransport());
+		chauffeurService.save(c);
 	}
 	
 	@DeleteMapping(value = "/chauffeur/{id}")

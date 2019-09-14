@@ -37,15 +37,16 @@ public class AdministrateurController {
 	
 	@PutMapping(value = "/administrateur/{id}")
 	public void update(@PathVariable("id") int idAdministrateur, @RequestBody Administrateur administrateur) {
-		Administrateur e = administrateurService.findById(idAdministrateur);
-		e.setNom(e.getNom());
-		e.setPrenom(e.getPrenom());
-		e.setDateNaissance(e.getDateNaissance());
-		e.setNumeroTelephone(e.getNumeroTelephone());
-		e.setAdresseMail(e.getAdresseMail());
-		e.setUsername(e.getUsername());
-		e.setPassword(e.getPassword());
-		administrateurService.save(e);
+		Administrateur a = administrateurService.findById(idAdministrateur);
+		a.setNom(a.getNom());
+		a.setPrenom(a.getPrenom());
+		a.setDateNaissance(a.getDateNaissance());
+		a.setNumeroTelephone(a.getNumeroTelephone());
+		a.setAdresseMail(a.getAdresseMail());
+		a.setUsername(a.getUsername());
+		a.setPassword(a.getPassword());
+		a.setGrade(a.getGrade());
+		administrateurService.save(a);
 	}
 	
 	@DeleteMapping(value = "/administrateur/{id}")

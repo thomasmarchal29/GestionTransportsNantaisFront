@@ -37,15 +37,17 @@ public class TechnicienController {
 	
 	@PutMapping(value = "/technicien/{id}")
 	public void update(@PathVariable("id") int idTechnicien, @RequestBody Technicien technicien) {
-		Technicien e = technicienService.findById(idTechnicien);
-		e.setNom(e.getNom());
-		e.setPrenom(e.getPrenom());
-		e.setDateNaissance(e.getDateNaissance());
-		e.setNumeroTelephone(e.getNumeroTelephone());
-		e.setAdresseMail(e.getAdresseMail());
-		e.setUsername(e.getUsername());
-		e.setPassword(e.getPassword());
-		technicienService.save(e);
+		Technicien t = technicienService.findById(idTechnicien);
+		t.setNom(t.getNom());
+		t.setPrenom(t.getPrenom());
+		t.setDateNaissance(t.getDateNaissance());
+		t.setNumeroTelephone(t.getNumeroTelephone());
+		t.setAdresseMail(t.getAdresseMail());
+		t.setUsername(t.getUsername());
+		t.setPassword(t.getPassword());
+		t.setDiplome(t.getDiplome());
+		t.setHabilitationTechnique(t.getHabilitationTechnique());
+		technicienService.save(t);
 	}
 	
 	@DeleteMapping(value = "/technicien/{id}")
