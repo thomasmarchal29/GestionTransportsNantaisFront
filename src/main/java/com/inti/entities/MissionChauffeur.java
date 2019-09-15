@@ -25,6 +25,7 @@ public class MissionChauffeur {
 	private Date horaireMission;
 	
 	private Administrateur administrateur;
+	private MoyenTransport moyenTransport;
 	
 	public MissionChauffeur() {
 		super();
@@ -74,6 +75,16 @@ public class MissionChauffeur {
 		this.administrateur = administrateur;
 	}
 	
+	@ManyToOne
+	@JoinColumn(name = "idMoyenTransport")
+	public MoyenTransport getMoyenTransport() {
+		return moyenTransport;
+	}
+
+	public void setMoyenTransport(MoyenTransport moyenTransport) {
+		this.moyenTransport = moyenTransport;
+	}
+
 	@ManyToMany(mappedBy = "listMissionChauffeur")
 	private List<Chauffeur> listChauffeur = new ArrayList<Chauffeur>();
 

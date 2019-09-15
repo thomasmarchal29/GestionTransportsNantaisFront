@@ -23,6 +23,7 @@ public class Maintenance {
 	private Date dateMaintenance;
 	
 	private Administrateur administrateur;
+	private MoyenTransport moyenTransport;
 
 	public Maintenance() {
 		super();
@@ -60,6 +61,16 @@ public class Maintenance {
 
 	public void setAdministrateur(Administrateur administrateur) {
 		this.administrateur = administrateur;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "idMoyenTransport")
+	public MoyenTransport getMoyenTransport() {
+		return moyenTransport;
+	}
+
+	public void setMoyenTransport(MoyenTransport moyenTransport) {
+		this.moyenTransport = moyenTransport;
 	}
 	
 	@ManyToMany(mappedBy = "listMaintenance")

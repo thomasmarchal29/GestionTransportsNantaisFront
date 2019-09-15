@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -83,9 +84,15 @@ public class MoyenTransport {
 	}
 	
 	@ManyToMany(mappedBy = "listMoyenTransport")
-	private List<Chauffeur> listChauffeur = new ArrayList<Chauffeur> ();
+	private List<Chauffeur> listChauffeur = new ArrayList<Chauffeur>();
 	
 	@ManyToMany(mappedBy = "listMoyenTransport")
-	private List<Technicien> listTechnicien = new ArrayList<Technicien> ();
+	private List<Technicien> listTechnicien = new ArrayList<Technicien>();
+	
+	@OneToMany(mappedBy = "moyenTransport")
+	private List<MissionChauffeur> listMissionChauffeur = new ArrayList<MissionChauffeur>();
+	
+	@OneToMany(mappedBy = "moyenTransport")
+	private List<Maintenance> listMaintenance = new ArrayList<Maintenance>();
 
 }
