@@ -1,0 +1,214 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    media="all" />
+
+<div style="text-align:center" class="cover-photo-holder" id="bandeau1">
+    <img height=80% width=70% src="{{ '/assets/image.jpg' }}" (click)="goHome()" />
+</div>
+<div id="bandeau2" class="container">
+    <div class="jumbotron">
+        <h1>Page d'affectation des missions et des maintenances</h1>
+        <p>Sur cette page vous pouvez affecter des missions aux chauffeurs et aux techniciens</p>
+    </div>
+</div>
+
+<div class="container">
+    <input type="button" style="text-align:left" class="btn btn-success" value="Page précédente"
+        (click)="goBackButtonPressed()" />
+    <br />
+    <br />
+    <br />
+    <h2>Liste des missions des chauffeurs</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Date</th>
+                <th>Horaire</th>
+                <th>Ligne</th>
+                <th>Moyen de transport</th>
+                <th>Chauffeur</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let missionChauffeur of missionChauffeurs">
+
+            <td>{{missionChauffeur.dateMission}}</td>
+            <td>{{missionChauffeur.horaireMission}}</td>
+            <td>{{missionChauffeur.ligneNantes}}</td>
+            <td>{{missionChauffeur.moyenTransport.typeMoyenTransport}},
+                {{missionChauffeur.moyenTransport.immatriculation}}</td>
+            <td>{{missionChauffeur.chauffeur.nom|uppercase}} {{missionChauffeur.chauffeur.prenom}}</td>
+            <td><input type="button" value="Modifier" class="btn btn-dark"
+                    (click)="modifyClickedMissionChauffeur(missionChauffeur)" /></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteMissionChauffeur(missionChauffeur)"> <i
+                        class="fa fa-trash"></i></button></td>
+        </tr>
+    </table>
+
+    <div *ngIf="modifiableMissionChauffeur">
+
+        <h2>Modification d'une mission de chauffeur</h2>
+
+        <table>
+            <tr>
+                <td>Date</td>
+                <td>Horaire</td>
+                <td>Ligne</td>
+                <td>Moyen de transport</td>
+                <td>Chauffeur</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="missionChauffeur.dateMission" placeholder="YYYY-MM-DD"></td>
+                <td><input type="text" [(ngModel)]="missionChauffeur.horaireMission" placeholder="HH:mm:SS"></td>
+                <td><select [(ngModel)]="missionChauffeur.ligneNantes">
+                        <option *ngFor="let ligneNantes of keys(LigneNantes)">
+                            {{ligneNantes}}
+                        </option>
+                    </select></td>
+                <td><select [(ngModel)]="missionChauffeur.moyenTransport">
+                        <option *ngFor="let moyTrans of moyenTransports" [(ngValue)]="moyTrans">
+                            {{moyTrans.typeMoyenTransport}}
+                            {{moyTrans.immatriculation}}</option>
+                    </select></td>
+                <td><select [(ngModel)]="missionChauffeur.chauffeur">
+                        <option *ngFor="let chauf of chauffeurs" [(ngValue)]="chauf">{{chauf.nom|uppercase}},
+                            {{chauf.prenom}}</option>
+                    </select></td>
+            </tr>
+        </table>
+        <input type="button" value="Modifier" class="btn btn-warning" (click)="updateMissionChauffeur(chauffeur)" />
+
+    </div>
+    <div *ngIf="!modifiableMissionChauffeur">
+
+        <h2>Ajout d'une mission de chauffeur</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Date</td>
+                    <td>Horaire</td>
+                    <td>Ligne</td>
+                    <td>Moyen de transport</td>
+                    <td>Chauffeur</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="missionChauffeur.dateMission" placeholder="YYYY-MM-DD"></td>
+                    <td><input type="text" [(ngModel)]="missionChauffeur.horaireMission" placeholder="HH:mm:SS"></td>
+                    <td><select [(ngModel)]="missionChauffeur.ligneNantes">
+                            <option *ngFor="let ligneNantes of keys(LigneNantes)">
+                                {{ligneNantes}}
+                            </option>
+                        </select></td>
+                    <td><select [(ngModel)]="missionChauffeur.moyenTransport">
+                            <option *ngFor="let moyTrans of moyenTransports" [(ngValue)]="moyTrans">
+                                {{moyTrans.typeMoyenTransport}}
+                                {{moyTrans.immatriculation}}</option>
+                        </select></td>
+                    <td><select [(ngModel)]="missionChauffeur.chauffeur">
+                            <option *ngFor="let chauf of chauffeurs" [(ngValue)]="chauf">{{chauf.nom|uppercase}}
+                                {{chauf.prenom}}</option>
+                        </select></td>
+                </tr>
+            </table>
+            <br>
+            <button type="button" class="btn btn-warning" (click)="saveMissionChauffeur()"><i class="fa fa-plus"></i>
+                Ajouter</button>
+        </div>
+    </div>
+
+    <br>
+
+    <h1>Liste des maintenances</h1>
+
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+
+                    <th>Date</th>
+                    <th>Moyen de transport</th>
+                    <th>Techniciens</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr *ngFor="let maintenance of maintenances">
+
+                <td>{{maintenance.dateMaintenance}}</td>
+                <td>{{maintenance.moyenTransport.typeMoyenTransport}}</td>
+                <td><output *ngFor="let technicien of maintenance.listTechnicien">{{technicien.nom|uppercase}}
+                        {{technicien.prenom}}/</output></td>
+                <td><input type="button" value="Modifier" class="btn btn-dark"
+                        (click)="modifyClickedMaintenance(maintenance)" /></td>
+                <td><button type="button" class="btn btn-danger" (click)="deleteMaintenance(maintenance)"> <i
+                            class="fa fa-trash"></i></button></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div *ngIf="modifiableMaintenance">
+
+        <h2>Modification d'une maintenance</h2>
+
+        <table>
+            <tr>
+                <td>Date</td>
+                <td>Moyen de transport</td>
+                <td>Techniciens</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="maintenance.dateMaintenance" placeholder="YYYY-MM-DD"></td>
+                <td><select [(ngModel)]="maintenance.moyenTransport">
+                        <option *ngFor="let moyTrans of moyenTransports" [(ngValue)]="moyTrans">
+                            {{moyTrans.typeMoyenTransport}},
+                            {{moyTrans.immatriculation}}</option>
+                    </select></td>
+                <td><select multiple [(ngModel)]="maintenance.listTechnicien">
+                        <option *ngFor="let technicien of techniciens" [(ngValue)]="technicien">
+                            {{technicien.nom|uppercase}}
+                            {{technicien.prenom}}</option>
+                    </select></td>
+            </tr>
+        </table>
+        <input type="button" value="Modifier la maintenance" class="btn btn-warning"
+            (click)="updateMaintenance(maintenance)" />
+    </div>
+
+    <div *ngIf="!modifiableMaintenance">
+
+        <h2>Ajout d'une maintenance</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Date</td>
+                    <td>Moyen de transport</td>
+                    <td>Techniciens</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="maintenance.dateMaintenance" placeholder="YYYY-MM-DD"></td>
+                    <td><select [(ngModel)]="maintenance.moyenTransport">
+                            <option *ngFor="let moyTrans of moyenTransports" [(ngValue)]="moyTrans">
+                                {{moyTrans.typeMoyenTransport}},
+                                {{moyTrans.immatriculation}}</option>
+                        </select></td>
+                    <td><select multiple [(ngModel)]="maintenance.listTechnicien">
+                            <option *ngFor="let technicien of techniciens" [(ngValue)]="technicien">
+                                {{technicien.nom|uppercase}}
+                                {{technicien.prenom}}</option>
+                        </select></td>
+                </tr>
+            </table>
+            <button type="button" class="btn btn-warning" (click)="saveMaintenance()"><i class="fa fa-plus"></i>
+                Ajouter</button>
+        </div>
+    </div>
+</div>

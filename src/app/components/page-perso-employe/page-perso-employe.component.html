@@ -1,0 +1,78 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<div style="text-align:center" class="cover-photo-holder" id="bandeau1">
+    <img height=80% width=70% src="{{ '/assets/image.jpg' }}" (click)="goHome()"/>
+</div>
+<div id="bandeau2" class="container">
+    <div class="jumbotron">
+        <h1>Votre espace personnel</h1>
+        <p>Sur cette page vous pouvez consulter votre planning et accéder à vos demandes de congés</p>
+    </div>
+</div>
+
+<div class="container">
+    <div id="premier">
+        <input type="button" value="Page précédente" class="btn btn-success" (click)="goBackButtonPressed()" />
+    </div>
+    <div id="deuxième" style="text-align:right">
+        <input type="button" value="Page des demandes de congés" class="btn btn-primary"
+            (click)="goDemandeCongesPressed()" />
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <h2>Liste des missions de l'employé</h2>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th>Date</th>
+                <th>Horaire</th>
+                <th>Ligne</th>
+                <th>Moyen de transport</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let missionChauffeur of missionChauffeurs">
+
+            <td>{{missionChauffeur.dateMission}}</td>
+            <td>{{missionChauffeur.horaireMission}}</td>
+            <td>{{missionChauffeur.ligneNantes}}</td>
+            <td>{{missionChauffeur.moyenTransport.typeMoyenTransport}},
+                {{missionChauffeur.moyenTransport.immatriculation}}</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <div>
+
+        <h2>Liste des maintenances de l'employé</h2>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Moyen de transport</th>
+                    <th>Liste des techniciens</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let maintenance of maintenances">
+
+                <td>{{maintenance.dateMaintenance}}</td>
+                <td>{{maintenance.moyenTransport.typeMoyenTransport}}, {{maintenance.moyenTransport.immatriculation}}
+                </td>
+                <td><output *ngFor="let technicien of maintenance.listTechnicien">{{technicien.nom|uppercase}}
+                        {{technicien.prenom}}/</output></td>
+            </tr>
+        </table>
+
+    </div>
+</div>

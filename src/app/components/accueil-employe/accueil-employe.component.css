@@ -1,0 +1,12 @@
+div#premier {
+    float:left;
+    width : 20%;
+    height : 36%;
+background-color:white;			
+}
+div#deuxième {
+    float:right;
+    width:80%;
+    height:30%;
+    
+}

@@ -1,0 +1,95 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    media="all" />
+
+<div style="text-align:center" class="cover-photo-holder" id="bandeau1">
+    <img height=80% width=70% src="{{ '/assets/image.jpg' }}" (click)="goHome()" />
+</div>
+<div id="bandeau2" class="container">
+    <div class="jumbotron">
+        <h1>Page des demandes de congés</h1>
+        <p>Sur cette page vous pouvez faire des demandes de congés</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <input type="button" value="Page précédente" class="btn btn-success" (click)="goBackButtonPressed()" />
+    <br />
+    <br />
+    <br />
+
+    <h2>Liste des demandes de congés</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Commentaire</th>
+                <th>État de validation</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let conges of congess">
+
+            <td>{{conges.dateDebut}}</td>
+            <td>{{conges.dateFin}}</td>
+            <td>{{conges.commentaire}}</td>
+            <td>{{conges.etatConges}}</td>
+            <td><input type="button" value="Modifier" class="btn btn-dark" (click)="modifyClickedConges(conges)" /></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteConges(conges)"> <i
+                        class="fa fa-trash"></i></button></td>
+        </tr>
+    </table>
+
+
+    <div *ngIf="modifiableConges">
+
+        <h2>Modification d'une demande de congés</h2>
+
+        <table>
+            <tr>
+                <td>Date de début</td>
+                <td>Date de fin</td>
+                <td>Commentaire</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="conges.dateDebut" placeholder="YYYY-MM-DD"></td>
+                <td><input type="text" [(ngModel)]="conges.dateFin" placeholder="YYYY-MM-DD"></td>
+                <td><input type="textarea" [(ngModel)]="conges.commentaire"
+                    placeholder="Veuillez indiquer les raisons de la demande"></td>
+            </tr>
+        </table>
+        <input type="button" value="Modifier la demande de congés" class="btn btn-warning"
+            (click)="updateConges(conges)" />
+    </div>
+
+    <div *ngIf="!modifiableConges">
+
+        <h2>Ajout d'une demande de congés</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Date de début</td>
+                    <td>Date de fin</td>
+                    <td>Commentaire</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="conges.dateDebut" placeholder="YYYY-MM-DD"></td>
+                    <td><input type="text" [(ngModel)]="conges.dateFin" placeholder="YYYY-MM-DD"></td>
+                    <td><textarea [(ngModel)]="conges.commentaire"
+                        placeholder="Veuillez indiquer les raisons de la demande"></textarea></td>
+                </tr>
+            </table>
+            <button type="button" class="btn btn-warning" (click)="saveConges()"><i class="fa fa-plus"></i>
+                Ajouter</button>
+        </div>
+    </div>
+</div>

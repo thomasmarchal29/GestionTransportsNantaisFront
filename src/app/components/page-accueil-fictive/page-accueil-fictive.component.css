@@ -1,0 +1,12 @@
+div#premier {
+    float:left;
+    width : 50%;
+    height : 36%;
+    text-align: center;
+}
+div#deuxième {
+    float:right;
+    width:50%;
+    height:36%;
+    text-align: center;
+}

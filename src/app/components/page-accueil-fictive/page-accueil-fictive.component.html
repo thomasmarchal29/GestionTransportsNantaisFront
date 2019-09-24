@@ -1,0 +1,32 @@
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<div style="text-align:center" class="cover-photo-holder" id="bandeau1">
+        <img height = 80% width = 70% src = "{{ '/assets/image.jpg' }}" (click)="goBackButtonPressed()"/>
+    </div>
+<div id="bandeau2" class="container">
+        <div class="jumbotron">
+          <h1>Bienvenue sur le site de gestion des transports en commun Nantais</h1>  
+          <p>Sur cette page vous pouvez vous rediriger</p>
+        </div>
+      </div>
+<div class="container">
+<div id="premier">
+<h2>Page Employés</h2> 
+
+<input type="button" value="Page d'accueil des employés" class="btn btn-success" (click)="goAccueilEmployePressed()" />
+</div>
+<div id="deuxième">
+<h2>Page Administrateurs</h2>
+ 
+<input type="button" value="Page d'accueil des administrateurs" class="btn btn-success" (click)="goAccueilAdministrateurPressed()" />
+</div>
+
+</div>
+
+<br>

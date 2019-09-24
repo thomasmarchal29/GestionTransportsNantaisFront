@@ -1,0 +1,390 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    media="all" />
+
+<div style="text-align:center" class="cover-photo-holder" id="bandeau1">
+    <img height=80% width=70% src="{{ '/assets/image.jpg' }}" (click)="goHome()" />
+</div>
+<div id="bandeau2" class="container">
+    <div class="jumbotron">
+        <h1>Page d'accueil administrateur</h1>
+        <p>Sur cette page vous pouvez consulter les listes de chauffeurs, de techniciens ainsi que les différents
+            véhicules</p>
+    </div>
+</div>
+
+<div class="container">
+    <div id="premier">
+        <input type="button" value="Page précédente" class="btn btn-success" (click)="goBackButtonPressed()" />
+    </div>
+</div>
+<div class="container">
+    <div style="text-align:right">
+        <input type="button" value="Validation des congés" class="btn btn-light" (click)="goValidationConges()" />
+    </div>
+</div>
+<br/>
+<br/>
+<div class="container">
+    <div style="text-align:right"><input type="button" class="btn btn-primary"
+            value="Affectation de missions et maintenances" (click)="addNewMissionPressed()" /></div>
+
+    
+    
+
+    <h2>Liste des chauffeurs</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Numéro de téléphone</th>
+                <th>Adresse mail</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Habilitation</th>
+                <th>Permis</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let chauffeur of chauffeurs">
+
+            <td>{{chauffeur.nom|uppercase}}</td>
+            <td>{{chauffeur.prenom}}</td>
+            <td>{{chauffeur.dateNaissance}}</td>
+            <td>{{chauffeur.numeroTelephone}}</td>
+            <td>{{chauffeur.adresseMail}}</td>
+            <td>{{chauffeur.username}}</td>
+            <td>{{chauffeur.password}}</td>
+            <td>{{chauffeur.habilitationMoyenTransport}}</td>
+            <td>{{chauffeur.permis}}</td>
+            <td><input type="button" value="Modifier" class="btn btn-dark"
+                    (click)="modifyClickedChauffeur(chauffeur)" /></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteChauffeur(chauffeur)"> <i
+                        class="fa fa-trash"></i></button></td>
+        </tr>
+    </table>
+
+
+    <div *ngIf="modifiableChauffeur">
+
+        <h2>Modification d'un chauffeur</h2>
+
+        <table>
+            <tr>
+                <td>Nom</td>
+                <td>Prénom</td>
+                <td>Date de naissance</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="chauffeur.nom"></td>
+                <td><input type="text" [(ngModel)]="chauffeur.prenom"></td>
+                <td><input type="text" [(ngModel)]="chauffeur.dateNaissance" placeholder="YYYY-MM-DD"></td>
+            </tr>
+            <tr>
+                <td>Numéro de téléphone</td>
+                <td>Adresse mail</td>
+                <td>Username</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="chauffeur.numeroTelephone"></td>
+                <td><input type="text" [(ngModel)]="chauffeur.adresseMail"></td>
+                <td><input type="text" [(ngModel)]="chauffeur.username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>Habilitation</td>
+                <td>Permis</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="chauffeur.password"></td>
+                <td><select [(ngModel)]="chauffeur.habilitationMoyenTransport">
+                        <option *ngFor="let habilitationMoyenTransport of keys(HabilitationMoyenTransport)">
+                            {{habilitationMoyenTransport}}
+                        </option>
+                    </select></td>
+                <td><input type="text" [(ngModel)]="chauffeur.permis"></td>
+            </tr>
+        </table>
+        <br />
+        <input type="button" class="btn btn-warning" value="Modifier le chauffeur"
+            (click)="updateChauffeur(chauffeur)" />
+    </div>
+
+    <div *ngIf="!modifiableChauffeur">
+
+        <h2>Ajout d'un chauffeur</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Date de naissance</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="chauffeur.nom"></td>
+                    <td><input type="text" [(ngModel)]="chauffeur.prenom"></td>
+                    <td><input type="text" [(ngModel)]="chauffeur.dateNaissance" placeholder="YYYY-MM-DD"></td>
+                </tr>
+                <tr>
+                    <td>Numéro de téléphone</td>
+                    <td>Adresse mail</td>
+                    <td>Username</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="chauffeur.numeroTelephone"></td>
+                    <td><input type="text" [(ngModel)]="chauffeur.adresseMail"></td>
+                    <td><input type="text" [(ngModel)]="chauffeur.username"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>Habilitation</td>
+                    <td>Permis</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="chauffeur.password"></td>
+                    <td><select [(ngModel)]="chauffeur.habilitationMoyenTransport">
+                            <option *ngFor="let habilitationMoyenTransport of keys(HabilitationMoyenTransport)">
+                                {{habilitationMoyenTransport}}
+                            </option>
+                        </select></td>
+                    <td><input type="text" [(ngModel)]="chauffeur.permis"></td>
+                </tr>
+            </table>
+            <br />
+            <button type="button" class="btn btn-warning" (click)="saveChauffeur()"><i class="fa fa-plus"></i>
+                Ajouter</button>
+        </div>
+    </div>
+
+    <div style="text-align:right"><input type="button" class="btn btn-primary"
+            value="Affectation de missions et maintenances" (click)="addNewMissionPressed()" /></div>
+    <br />
+
+    <h2>Liste des techniciens</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Numéro de téléphone</th>
+                <th>Adresse mail</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Diplôme</th>
+                <th>Habilitation</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let technicien of techniciens">
+
+            <td>{{technicien.nom|uppercase}}</td>
+            <td>{{technicien.prenom}}</td>
+            <td>{{technicien.dateNaissance}}</td>
+            <td>{{technicien.numeroTelephone}}</td>
+            <td>{{technicien.adresseMail}}</td>
+            <td>{{technicien.username}}</td>
+            <td>{{technicien.password}}</td>
+            <td>{{technicien.diplome}}</td>
+            <td>{{technicien.habilitationMoyenTransport}}</td>
+            <td><input type="button" value="Modifier" class="btn btn-dark"
+                    (click)="modifyClickedTechnicien(technicien)" /></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteTechnicien(technicien)"> <i
+                        class="fa fa-trash"></i></button></td>
+        </tr>
+    </table>
+
+
+    <div *ngIf="modifiableTechnicien">
+
+        <h2>Modification d'un technicien</h2>
+
+        <table>
+            <tr>
+                <td>Nom</td>
+                <td>Prénom</td>
+                <td>Date de naissance</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="technicien.nom"></td>
+                <td><input type="text" [(ngModel)]="technicien.prenom"></td>
+                <td><input type="text" [(ngModel)]="technicien.dateNaissance" placeholder="YYYY-MM-DD"></td>
+            </tr>
+            <tr>
+                <td>Numéro de téléphone</td>
+                <td>Adresse mail</td>
+                <td>Username</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="technicien.numeroTelephone"></td>
+                <td><input type="text" [(ngModel)]="technicien.adresseMail"></td>
+                <td><input type="text" [(ngModel)]="technicien.username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>Diplôme</td>
+                <td>Habilitation</td>
+            </tr>
+            <tr>
+                <td><input type="text" [(ngModel)]="technicien.password"></td>
+                <td><input type="text" [(ngModel)]="technicien.diplome"></td>
+                <td><select [(ngModel)]="technicien.habilitationMoyenTransport">
+                        <option *ngFor="let habilitationMoyenTransport of keys(HabilitationMoyenTransport)">
+                            {{habilitationMoyenTransport}}
+                        </option>
+                    </select></td>
+            </tr>
+        </table>
+        <br />
+        <input type="button" class="btn btn-warning" value="Modifier le technicien"
+            (click)="updateTechnicien(technicien)" />
+    </div>
+
+    <div *ngIf="!modifiableTechnicien">
+
+        <h2>Ajout d'un technicien</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Date de naissance</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="technicien.nom"></td>
+                    <td><input type="text" [(ngModel)]="technicien.prenom"></td>
+                    <td><input type="text" [(ngModel)]="technicien.dateNaissance" placeholder="YYYY-MM-DD"></td>
+                </tr>
+                <tr>
+                    <td>Numéro de téléphone</td>
+                    <td>Adresse mail</td>
+                    <td>Username</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="technicien.numeroTelephone"></td>
+                    <td><input type="text" [(ngModel)]="technicien.adresseMail"></td>
+                    <td><input type="text" [(ngModel)]="technicien.username"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>Diplôme</td>
+                    <td>Habilitation</td>
+                </tr>
+                <tr>
+                    <td><input type="text" [(ngModel)]="technicien.password"></td>
+                    <td><input type="text" [(ngModel)]="technicien.diplome"></td>
+                    <td><select [(ngModel)]="technicien.habilitationMoyenTransport">
+                            <option *ngFor="let habilitationMoyenTransport of keys(HabilitationMoyenTransport)">
+                                {{habilitationMoyenTransport}}
+                            </option>
+                        </select></td>
+                </tr>
+            </table>
+            <br />
+            <button type="button" class="btn btn-warning" (click)="saveTechnicien()"><i class="fa fa-plus"></i>
+                Ajouter</button>
+        </div>
+    </div>
+
+    <div style="text-align:right"><input type="button" class="btn btn-primary"
+            value="Affectation de missions et maintenances" (click)="addNewMissionPressed()" /></div>
+    <br />
+
+    <h2>Liste des moyens de transport</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+
+                <th>Type</th>
+                <th>Immatriculation</th>
+                <th>Vétusté</th>
+                <th>Date de dernière révision</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let moyenTransport of moyenTransports">
+
+            <td>{{moyenTransport.typeMoyenTransport}}</td>
+            <td>{{moyenTransport.immatriculation}}</td>
+            <td>{{moyenTransport.vetuste}}</td>
+            <td>{{moyenTransport.dateDerniereRevision}}</td>
+            <td><input type="button" value="Modifier" class="btn btn-dark"
+                    (click)="modifyClickedMoyenTransport(moyenTransport)" /></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteMoyenTransport(moyenTransport)"> <i
+                        class="fa fa-trash"></i></button></td>
+        </tr>
+    </table>
+
+
+    <div *ngIf="modifiableMoyenTransport">
+
+        <h2>Modification d'un moyen de transport</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Type</td>
+                    <td>Immatriculation</td>
+                    <td>Vétusté</td>
+                    <td>Date de dernière révision</td>
+                </tr>
+                <tr>
+                    <td><select [(ngModel)]="moyenTransport.typeMoyenTransport">
+                        <option *ngFor="let typeMoyenTransport of keys(TypeMoyenTransport)">
+                            {{typeMoyenTransport}}
+                        </option>
+                    </select></td>
+                    <td><input type="text" [(ngModel)]="moyenTransport.immatriculation"></td>
+                    <td><input type="text" [(ngModel)]="moyenTransport.vetuste"></td>
+                    <td><input type="text" [(ngModel)]="moyenTransport.dateDerniereRevision" placeholder="YYYY-MM-DD">
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <input type="button" value="Modifier" class="btn btn-warning"
+                (click)="updateMoyenTransport(moyenTransport)" />
+        </div>
+    </div>
+
+    <div *ngIf="!modifiableMoyenTransport">
+
+        <h2>Ajout d'un moyen de transport</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Type</td>
+                    <td>Immatriculation</td>
+                    <td>Vétusté</td>
+                    <td>Date de dernière révision</td>
+                </tr>
+                <tr>
+                    <td><select [(ngModel)]="moyenTransport.typeMoyenTransport">
+                            <option *ngFor="let typeMoyenTransport of keys(TypeMoyenTransport)">
+                                {{typeMoyenTransport}}
+                            </option>
+                        </select></td>
+                    <td><input type="text" [(ngModel)]="moyenTransport.immatriculation"></td>
+                    <td><input type="text" [(ngModel)]="moyenTransport.vetuste"></td>
+                    <td><input type="text" [(ngModel)]="moyenTransport.dateDerniereRevision" placeholder="YYYY-MM-DD">
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <button type="button" class="btn btn-warning" (click)="saveMoyenTransport()"><i class="fa fa-plus"></i>
+                Ajouter</button>
+        </div>
+    </div>
+</div>
